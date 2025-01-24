@@ -38,7 +38,7 @@ Add this to your HTML header
 
 ```
 
-### Features
+## Features
 
 - formatted & colored output
 - resolving of circular objects
