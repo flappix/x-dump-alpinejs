@@ -1,3 +1,6 @@
 module.exports = {
-  watch: true,
+	watch: true,
+	output: {
+        filename: 'x-dump-alpinejs.min.js'
+    },
 };

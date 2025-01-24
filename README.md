@@ -13,7 +13,7 @@ Add this to your HTML header
 ```html
 <html>
 	<head>
-		<script src="https://github.com/flappix/x-dump-alpinejs/dist/main.js"></script>
+		<script src="x-dump-alpinejs.min.js"></script>
 		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 		<script>
 			function App() {
