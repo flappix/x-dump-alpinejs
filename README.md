@@ -5,7 +5,7 @@ AlpineJS plugin which allows you to dump variables or expressions in the DOM.
 
 Add this to your HTML header
 ```html
-<script src="https://github.com/flappix/x-dump-alpinejs/dist/main.js"></script>
+<script src="x-dump-alpinejs.min.js"></script>
 ```
 
 ## Usage
