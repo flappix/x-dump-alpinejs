@@ -1,6 +1,8 @@
 # x-dump-alpinejs
 AlpineJS plugin which allows you to dump variables or expressions in the DOM.
 
+![screenshot](https://raw.githubusercontent.com/flappix/x-dump-alpinejs/refs/heads/main/screenshot1.png)
+
 ## Features
 
 - formatted & colored output
