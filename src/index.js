@@ -11,10 +11,13 @@ document.head.appendChild (style);
 
 document.addEventListener ('alpine:init', () => {
 	Alpine.directive ( 'dump', ( el, {expression}, {evaluateLater, effect}) => {
-		const ev = evaluateLater (expression);
-		
+		const evl = evaluateLater (expression);
+		let isStatic = el.hasAttribute ('static');
 		let dump = (d) => {
 			let cache = [];
+			
+				//let type = Array.isArray (d) ? 'array' : typeof (d);
+				let type = typeof (d) == 'object' ? Object.prototype.toString.call(d) : typeof (d);
 				let ev = hljs.highlight (
 					JSON.stringify ( 
 						(d), (key, value) =>
@@ -29,22 +32,23 @@ document.addEventListener ('alpine:init', () => {
 					),
 					{language: 'javascript'}
 				).value;
-
+				
+				el.style.display = 'inline-block'
 				el.innerHTML = `
 					<div style="font-family: monospace;">
-						<div style="white-space: pre-wrap; background-color: #252525; padding: 0.2rem; color: white;">${expression}</div>
+						<div style="white-space: pre-wrap; background-color: #252525; padding: 0.2rem; color: white;">${expression}: <span style="font-weight: bold;">${type}</span> ${isStatic ? '<i style="color: #BF045E;">static</i>' : ''}</div>
 						<div style="white-space: pre-wrap; background-color: black; color: lightgreen; padding: 0.2rem;">${ev}</div>
 					</div>`;
 		};
 		
-		if ( !el.hasAttribute ('static') )
+		if ( !isStatic )
 		{
 			effect ( () => {
-				ev (dump)
+				evl (dump)
 			})
 		}
 		else {
-			ev (dump);
+			evl (dump);
 		}
     });
 });
