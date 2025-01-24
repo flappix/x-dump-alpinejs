@@ -46,7 +46,7 @@ Add `static` attribute to make dump non-reactive and let the expression stay in 
 
 ### limit
 
-By default the dump is limited to 200 characters. Use `limit` attribute to modify this. Use `limit=-1` to print everything.
+By default the dump is limited to 200 characters. Use `limit` attribute to modify this. Use `limit="-1"` to print everything.
 
 ```html
 <div x-dump="Array.from(Array(100).keys())" limit="50"></div>
@@ -60,32 +60,24 @@ By default the dump is limited to 200 characters. Use `limit` attribute to modif
 	<head>
 		<script src="x-dump-alpinejs.min.js"></script>
 		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-		<script>
-			function App() {
-				return {
-					users: [{
-						id: 0,
-						name: 'Peter'
-					},
-					{
-						id: 1,
-						name: 'Lois'
-					}]
-				}
-			}
-		</script>
 	</head>
 
-	<body x-data="App()">
+	<body x-data="{l: [1,2,3,4]}">
+		
+		<span x-dump="Math.abs (-2) + 43"></span>
+		<span x-dump="[1,2,3,4].filter ( x => x % 2 == 0)"></span>
+		<span x-dump="'foo' + 'bar'"></span>
 		
 		<!-- reflects dynamic changes -->
-		<div x-dump="users"></div>
+		<div x-dump="l"></div>
 		
 		<!-- will not change after "users" is modified -->
-		<div x-dump="users" static></div>
+		<div x-dump="l" static></div>
 		
+		<button x-on:click="l.push (-1)">Add</button>
 		
-		<button x-on:click="users.push ({id: 2, name: 'Brian'})">Add</button>
+		<div x-dump="Array.from(Array(100).keys())" limit="50"></div>
+		<div x-dump="Array.from(Array(100).keys())" limit="-1"></div>
 	</body>
 
 </html>
