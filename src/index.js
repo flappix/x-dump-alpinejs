@@ -13,33 +13,38 @@ document.addEventListener ('alpine:init', () => {
 	Alpine.directive ( 'dump', ( el, {expression}, {evaluateLater, effect}) => {
 		const evl = evaluateLater (expression);
 		let isStatic = el.hasAttribute ('static');
+		let limit = Number (el.getAttribute ('limit') ?? '200') + 1;
+		let expr_limit = 50 + 1;
+		let expr = `${expression.substring (0, expr_limit)}${expression.length > expr_limit ? '...' : ''}`
 		let dump = (d) => {
 			let cache = [];
 			
 				//let type = Array.isArray (d) ? 'array' : typeof (d);
 				let type = typeof (d) == 'object' ? Object.prototype.toString.call(d) : typeof (d);
-				let ev = hljs.highlight (
-					JSON.stringify ( 
-						(d), (key, value) =>
-						typeof value === "object" && value !== null ?
-							cache.includes(value) ?
-								undefined // Duplicate reference found, discard key
-							:
-								cache.push (value) && value // Store value in our collection
+				let ev = JSON.stringify ( 
+					(d), (key, value) =>
+					typeof value === "object" && value !== null ?
+						cache.includes(value) ?
+							undefined // Duplicate reference found, discard key
 						:
-							value,
-							2
-					),
-					{language: 'javascript'}
-				).value;
+							cache.push (value) && value // Store value in our collection
+					:
+						value,
+						2
+				);
+
+				ev = hljs.highlight ( limit > 0 ? ev.substring (0, limit) : ev,
+									 {language: 'javascript'}
+				).value + (limit > 0 && ev.length > limit ? '...' : '');
 				
 				el.style.display = 'inline-block'
 				el.innerHTML = `
 					<div style="font-family: monospace;">
-						<div style="white-space: pre-wrap; background-color: #252525; padding: 0.2rem; color: white;">${expression}: <span style="font-weight: bold;">${type}</span> ${isStatic ? '<i style="color: #BF045E;">static</i>' : ''}</div>
+						<div style="white-space: pre-wrap; background-color: #252525; padding: 0.2rem; color: white;">${expr}: <span style="font-weight: bold;">${type}</span> ${isStatic ? '<i style="color: #BF045E;">static</i>' : ''}</div>
 						<div style="white-space: pre-wrap; background-color: black; color: lightgreen; padding: 0.2rem;">${ev}</div>
 					</div>`;
 		};
+		
 		
 		if ( !isStatic )
 		{

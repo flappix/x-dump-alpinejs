@@ -16,8 +16,10 @@
 		<!-- will not change after "users" is modified -->
 		<div x-dump="l" static></div>
 		
-		
 		<button x-on:click="l.push (-1)">Add</button>
+		
+		<div x-dump="Array.from(Array(100).keys())" limit="50"></div>
+		<div x-dump="Array.from(Array(100).keys())" limit="-1"></div>
 	</body>
 
 </html>

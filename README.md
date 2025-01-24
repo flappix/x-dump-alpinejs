@@ -17,6 +17,7 @@ Add this to your HTML header
 
 ## Usage
 
+### x-dump
 Add `x-dump="expression"` to any element
 
 ```html
@@ -25,6 +26,7 @@ Add `x-dump="expression"` to any element
 <span x-dump="'foo' + 'bar'"></span>
 ```
 
+### static
 Add `static` attribute to make dump non-reactive and let the expression stay in its initial state
 
 ```html
@@ -38,6 +40,15 @@ Add `static` attribute to make dump non-reactive and let the expression stay in 
 	
 	<button x-on:click="l.push (-1)">Add</button>
 </body>
+```
+
+### limit
+
+By default the dump is limited to 200 characters. Use `limit` attribute to modify this. Use `limit=-1` to print everything.
+
+```html
+<div x-dump="Array.from(Array(100).keys())" limit="50"></div>
+<div x-dump="Array.from(Array(100).keys())" limit="-1"></div>
 ```
 
 ## Example
