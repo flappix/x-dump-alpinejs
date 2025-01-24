@@ -9,6 +9,7 @@ AlpineJS plugin which allows you to dump variables or expressions in the DOM.
 - typing
 - resolving of circular object
 - two modes: reactive & non-reactive
+- configurable character limitation 
 
 ## Installation
 
