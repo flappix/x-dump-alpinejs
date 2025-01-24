@@ -46,7 +46,7 @@ Add this to your HTML header
 </html>
 ```
 
-### Features
+## Features
 
 - formatted & colored output
 - resolving of circular object
