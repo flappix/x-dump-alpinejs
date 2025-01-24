@@ -37,3 +37,8 @@ Add this to your HTML header
 </html>
 
 ```
+
+### Features
+
+- formatted & colored output
+- resolving of circular objects
