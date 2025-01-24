@@ -32,13 +32,21 @@ Add this to your HTML header
 	</head>
 
 	<body x-data="App()">
+		
+		<!-- reflects dynamic changes -->
 		<div x-dump="users"></div>
+		
+		<!-- will not change after "users" is modified -->
+		<div x-dump="users" static></div>
+		
+		
+		<button x-on:click="users.push ({id: 2, name: 'Brian'})">Add</button>
 	</body>
-</html>
 
+</html>
 ```
 
 ### Features
 
 - formatted & colored output
-- resolving of circular objects
+- resolving of circular object

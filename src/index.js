@@ -10,27 +10,41 @@ style.innerText = 'pre code.hljs{display:block;overflow-x:auto;padding:1em}code.
 document.head.appendChild (style);
 
 document.addEventListener ('alpine:init', () => {
-	Alpine.directive ( 'dump', ( el, {expression}, {evaluate}) => {
-		let cache = [];
-		let ev = hljs.highlight (
-			JSON.stringify ( 
-				( evaluate (expression) ), (key, value) =>
-				typeof value === "object" && value !== null ?
-					cache.includes(value) ?
-						undefined // Duplicate reference found, discard key
-					:
-						cache.push (value) && value // Store value in our collection
-				:
-					value,
-					2
-			),
-			{language: 'javascript'}
-		).value;
+	Alpine.directive ( 'dump', ( el, {expression}, {evaluateLater, effect}) => {
+		const ev = evaluateLater (expression);
+		
+		let dump = (d) => {
+			let cache = [];
+				let ev = hljs.highlight (
+					JSON.stringify ( 
+						(d), (key, value) =>
+						typeof value === "object" && value !== null ?
+							cache.includes(value) ?
+								undefined // Duplicate reference found, discard key
+							:
+								cache.push (value) && value // Store value in our collection
+						:
+							value,
+							2
+					),
+					{language: 'javascript'}
+				).value;
 
-		el.innerHTML = `
-			<div style="font-family: monospace;">
-				<div style="white-space: pre-wrap; background-color: #252525; padding: 0.2rem; color: white;">${expression}</div>
-				<div style="white-space: pre-wrap; background-color: black; color: lightgreen; padding: 0.2rem;">${ev}</div>
-			</div>`;
+				el.innerHTML = `
+					<div style="font-family: monospace;">
+						<div style="white-space: pre-wrap; background-color: #252525; padding: 0.2rem; color: white;">${expression}</div>
+						<div style="white-space: pre-wrap; background-color: black; color: lightgreen; padding: 0.2rem;">${ev}</div>
+					</div>`;
+		};
+		
+		if ( !el.hasAttribute ('static') )
+		{
+			effect ( () => {
+				ev (dump)
+			})
+		}
+		else {
+			ev (dump);
+		}
     });
 });
