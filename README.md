@@ -18,16 +18,22 @@ Add this to your HTML header
 		<script>
 			function App() {
 				return {
-					a: {a: 1},
-					b: {b: 2},
+					users: [{
+						id: 0,
+						name: 'Peter'
+					},
+					{
+						id: 1,
+						name: 'Lois'
+					}]
 				}
 			}
 		</script>
 	</head>
 
 	<body x-data="App()">
-		<div x-dump=""></div>
+		<div x-dump="users"></div>
 	</body>
-
 </html>
+
 ```
