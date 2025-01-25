@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<script src="x-dump-alpinejs.min.js"></script>
+		<script src="x-dump-alpinejs.min.js" limit="10"></script>
 		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 	</head>
 
@@ -18,6 +18,7 @@
 		
 		<button x-on:click="l.push (-1)">Add</button>
 		
+		<div x-dump="Array.from(Array(100).keys())"></div>
 		<div x-dump="Array.from(Array(100).keys())" limit="50"></div>
 		<div x-dump="Array.from(Array(100).keys())" limit="-1"></div>
 	</body>

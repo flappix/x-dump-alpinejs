@@ -49,10 +49,22 @@ The header of the dump will contain a label "static". By clicking on it the dump
 
 ### limit
 
-By default the dump is limited to 200 characters. Use `limit` attribute to modify this. Use `limit="-1"` to print everything.
+By default the dump is limited to 200 characters.
+To overwrite this setting globally use the `limit` attribute in the script tag.
+```html
+	<script src="x-dump-alpinejs.min.js" limit="500"></script>
+```
+
+You can also use `limit` attribute on individual elements.
 
 ```html
 <div x-dump="Array.from(Array(100).keys())" limit="50"></div>
+```
+
+Use `limit="-1"` to print everything.
+```html
+<script src="x-dump-alpinejs.min.js" limit="-1"></script>
+... or
 <div x-dump="Array.from(Array(100).keys())" limit="-1"></div>
 ```
 
