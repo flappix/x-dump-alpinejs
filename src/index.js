@@ -34,12 +34,28 @@ document.addEventListener ('alpine:init', () => {
 								 {language: 'javascript'}
 			).value + (limit > 0 && ev.length > limit ? '...' : '');
 			
-			el.style.display = 'inline-block'
-			el.innerHTML = `
-				<div style="font-family: monospace;">
-					<div style="white-space: pre-wrap; background-color: #252525; padding: 0.2rem; color: white;">${expr}: <span style="font-weight: bold;">${type}</span> ${isStatic ? '<i style="color: #BF045E;">static</i>' : ''}</div>
-					<div style="white-space: pre-wrap; background-color: black; color: lightgreen; padding: 0.2rem;">${ev}</div>
-				</div>`;
+			let staticLabel = document.createElement ('i');
+			staticLabel.innerText = 'static';
+			staticLabel.style.cssText = 'color: BF045E; cursor: pointer;';
+			staticLabel.addEventListener ( 'click', () => evl (dump) );
+			staticLabel.title = 'Update';
+			
+			let header =  document.createElement ('div');
+			header.style.cssText = 'white-space: pre-wrap; background-color: #252525; padding: 0.2rem; color: white;"';
+			header.innerHTML = `${expr}: <span style="font-weight: bold;">${type}</span>`;
+			if (isStatic) {
+				header.appendChild (staticLabel);
+			}
+			
+			let content = document.createElement ('div');
+			content.style.cssText = 'white-space: pre-wrap; background-color: black; color: lightgreen; padding: 0.2rem;';
+			content.innerHTML = ev;
+			
+			el.innerHTML = '';
+			el.style.display = 'inline-block';
+			el.style.fontFamily = 'monospace';
+			el.appendChild (header);
+			el.appendChild (content);			
 		};
 		
 		

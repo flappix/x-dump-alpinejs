@@ -45,6 +45,8 @@ Add `static` attribute to make dump non-reactive and let the expression stay in 
 </body>
 ```
 
+The header of the dump will contain a label "static". By clicking on it the dump refreshs to the most recent state.
+
 ### limit
 
 By default the dump is limited to 200 characters. Use `limit` attribute to modify this. Use `limit="-1"` to print everything.
