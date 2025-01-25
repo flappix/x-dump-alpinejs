@@ -19,7 +19,7 @@ document.addEventListener ('alpine:init', () => {
 		let dump = (d) => {
 			let cache = [];
 			
-			let type = typeof (d) == 'object' ? Object.prototype.toString.call(d) : typeof (d);
+			let type = ( typeof (d) == 'object' ? Object.prototype.toString.call(d) : typeof (d) ) + (d.length != null ? `(${d.length})` : '' );
 			let ev = JSON.stringify ( 
 				(d), (key, value) =>
 				typeof value === "object" && value !== null ?
