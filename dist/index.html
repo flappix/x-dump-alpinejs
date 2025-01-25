@@ -2,9 +2,13 @@
 	<head>
 		<script src="x-dump-alpinejs.min.js"></script>
 		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+		<style>
+			span, div {
+				margin: 0.5rem;
+		</style>
 	</head>
 
-	<body x-data="{l: [1,2,3,4]}">
+	<body x-data="{l: [1,2,3,4]}" style="width: 40vh;">
 		
 		<span x-dump="Math.abs (-2) + 43"></span>
 		<span x-dump="[1,2,3,4].filter ( x => x % 2 == 0)"></span>

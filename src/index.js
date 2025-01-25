@@ -42,15 +42,15 @@ document.addEventListener ('alpine:init', () => {
 			staticLabel.addEventListener ( 'click', () => evl (dump) );
 			staticLabel.title = 'Update';
 			
-			let header =  document.createElement ('div');
-			header.style.cssText = 'white-space: pre-wrap; background-color: #252525; padding: 0.2rem; color: white;"';
-			header.innerHTML = `${expr}: <span style="font-weight: bold;">${type}</span>`;
+			let header =  document.createElement ('xdump_header');
+			header.style.cssText = 'display: block; white-space: pre-wrap; background-color: #252525; padding: 0.2rem; color: white;"';
+			header.innerHTML = `${expr}: <xdump_type style="display: inline; font-weight: bold;">${type}</xdump_type>`;
 			if (isStatic) {
 				header.appendChild (staticLabel);
 			}
 			
-			let content = document.createElement ('div');
-			content.style.cssText = 'white-space: pre-wrap; background-color: black; color: lightgreen; padding: 0.2rem;';
+			let content = document.createElement ('xdump_content');
+			content.style.cssText = 'display: block; white-space: pre-wrap; background-color: black; color: lightgreen; padding: 0.2rem;';
 			content.innerHTML = ev;
 			
 			el.innerHTML = '';
