@@ -52,7 +52,7 @@ The header of the dump will contain a label "static". By clicking on it the dump
 By default the dump is limited to 200 characters.
 To overwrite this setting globally use the `limit` attribute in the script tag.
 ```html
-	<script src="x-dump-alpinejs.min.js" limit="500"></script>
+<script src="x-dump-alpinejs.min.js" limit="500"></script>
 ```
 
 You can also use `limit` attribute on individual elements.
