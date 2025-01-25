@@ -53,6 +53,20 @@ document.addEventListener ('alpine:init', () => {
 			content.style.cssText = 'display: block; white-space: pre-wrap; background-color: black; color: lightgreen; padding: 0.2rem;';
 			content.innerHTML = ev;
 			
+			let collapse = document.createElement ('xdump_collapse');
+			collapse.style.cssText = 'display: inline-block; cursor: pointer;';
+			collapse.innerHTML = ' &#x25BC;';
+			collapse.addEventListener ('click', () => {
+				content.style.display = content.style.display == 'block' ? 'none' : 'block';
+				console.log (collapse.innerHTML ==  ' &#x25BC;');
+				collapse.innerHTML = content.style.display == 'block' ? ' &#x25BC;' : ' &#9658;';
+				
+				//collapse.style.transform = 'rotate(0.5turn)';
+				//collapse.style.transform = collapse.style.transform == '' ? 'rotate(0.75turn)' : '';
+			});
+			
+			header.appendChild (collapse);
+			
 			el.innerHTML = '';
 			el.style.display = 'inline-block';
 			el.style.fontFamily = 'monospace';
