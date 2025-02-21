@@ -5,25 +5,59 @@
 		<style>
 			span, div {
 				margin: 0.5rem;
+			}
+			
 		</style>
 	</head>
 
 	<body x-data="{l: [1,2,3,4]}" style="width: 40vw;">
 		
+		<h1>Basic usage</h1>
+		<pre>&lt;span x-dump=&quot;Math.abs (-2) + 43&quot;&gt;&lt;/span&gt;
+&lt;span x-dump=&quot;[1,2,3,4].filter ( x =&gt; x % 2 == 0)&quot;&gt;&lt;/span&gt;
+&lt;span x-dump=&quot;'foo' + 'bar'&quot;&gt;&lt;/span&gt;</pre>
 		<span x-dump="Math.abs (-2) + 43"></span>
 		<span x-dump="[1,2,3,4].filter ( x => x % 2 == 0)"></span>
 		<span x-dump="'foo' + 'bar'"></span>
 		
-		<!-- reflects dynamic changes -->
-		<div x-dump="l"></div>
+		<h1>Reactive and non-reactive</h1>
+		<div style="display: flex;">
+			<div>
+				<!-- reflects dynamic changes -->
+				<h2>Reactive</h2>
+				<pre>&lt;div x-dump=&quot;l&quot;&gt;&lt;/div&gt;</pre>
+				<div x-dump="l"></div>
+			</div>
 		
-		<!-- will not change after "users" is modified -->
-		<div x-dump="l" static></div>
-		
+			<div>
+				<!-- will not change after "users" is modified -->
+				<h2>Non-reactive</h2>
+				<pre>&lt;div x-dump=&quot;l&quot; static&gt;&lt;/div&gt;</pre>
+				<div x-dump="l" static></div><br />
+				Click on "static" to update to the most recent version<br />
+			</div>
+			
+		</div>
 		<button x-on:click="l.push (-1)">Add</button>
+		Click the button to add data to array <span style="font-family: monospace;">l</span>. 
 		
+		
+		<h1>Limiting output</h1>
+		
+		<h2>Default limit of 200 characters</h2>
+		<pre>&lt;div x-dump=&quot;Array.from(Array(100).keys())&quot;&gt;&lt;/div&gt;</pre>
 		<div x-dump="Array.from(Array(100).keys())"></div>
+		<br />
+		<br />
+		
+		<h2>Custom limit of 50 characters</h2>
+		<pre>&lt;div x-dump=&quot;Array.from(Array(100).keys())&quot; limit=&quot;50&quot;&gt;&lt;/div&gt;</pre>
 		<div x-dump="Array.from(Array(100).keys())" limit="50"></div>
+		<br />
+		<br />
+		
+		<h2>Unlimited output</h2>
+		<pre>&lt;div x-dump=&quot;Array.from(Array(100).keys())&quot; limit=&quot;-1&quot;&gt;&lt;/div&gt;</pre>
 		<div x-dump="Array.from(Array(100).keys())" limit="-1"></div>
 	</body>
 </html>

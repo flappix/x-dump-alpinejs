@@ -7,6 +7,7 @@ style.innerText = 'pre code.hljs{display:block;overflow-x:auto;padding:1em}code.
 
 document.head.appendChild (style);
 let globalLimit = document.currentScript.getAttribute ('limit') ?? '200';
+let isCollapsedGlobal = document.currentScript.hasAttribute ('collapsed');
 
 document.addEventListener ('alpine:init', () => {
 	Alpine.directive ( 'dump', ( el, {expression}, {evaluateLater, effect}) => {
@@ -49,8 +50,9 @@ document.addEventListener ('alpine:init', () => {
 				header.appendChild (staticLabel);
 			}
 			
+			let isCollapsed = el.hasAttribute ('collapsed') || isCollapsedGlobal;
 			let content = document.createElement ('xdump_content');
-			content.style.cssText = 'display: block; white-space: pre-wrap; background-color: black; color: lightgreen; padding: 0.2rem;';
+			content.style.cssText = `display: ${isCollapsed ? 'none' : 'block'}; white-space: pre-wrap; background-color: black; color: lightgreen; padding: 0.2rem;`;
 			content.innerHTML = ev;
 			
 			let collapse = document.createElement ('xdump_collapse');
