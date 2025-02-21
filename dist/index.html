@@ -25,14 +25,18 @@
 			<div>
 				<!-- reflects dynamic changes -->
 				<h2>Reactive</h2>
-				<pre>&lt;div x-dump=&quot;l&quot;&gt;&lt;/div&gt;</pre>
+				<pre>&lt;body x-data=&quot;{l: [1,2,3,4]}&quot;&gt;
+    &lt;div x-dump=&quot;l&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;</pre>
 				<div x-dump="l"></div>
 			</div>
 		
 			<div>
 				<!-- will not change after "users" is modified -->
 				<h2>Non-reactive</h2>
-				<pre>&lt;div x-dump=&quot;l&quot; static&gt;&lt;/div&gt;</pre>
+				<pre>&lt;body x-data=&quot;{l: [1,2,3,4]}&quot;&gt;
+    &lt;div x-dump=&quot;l&quot; static&gt;&lt;/div&gt;
+&lt;/body&gt;</pre>
 				<div x-dump="l" static></div><br />
 				Click on "static" to update to the most recent version<br />
 			</div>
