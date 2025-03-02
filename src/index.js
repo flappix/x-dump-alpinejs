@@ -32,10 +32,10 @@ document.addEventListener ('alpine:init', () => {
 					value,
 					2
 			);
-
-			ev = hljs.highlight ( limit > 0 ? ev.substring (0, limit) : ev,
+			
+			let ev_limit = hljs.highlight ( limit > 0 ? ev.substring (0, limit) : ev,
 								 {language: 'javascript'}
-			).value + (limit > 0 && ev.length > limit ? '...' : '');
+			).value;
 			
 			let staticLabel = document.createElement ('i');
 			staticLabel.innerText = 'static';
@@ -53,7 +53,18 @@ document.addEventListener ('alpine:init', () => {
 			let isCollapsed = el.hasAttribute ('collapsed') || isCollapsedGlobal;
 			let content = document.createElement ('xdump_content');
 			content.style.cssText = `display: ${isCollapsed ? 'none' : 'block'}; white-space: pre-wrap; background-color: black; color: lightgreen; padding: 0.2rem;`;
-			content.innerHTML = ev;
+			
+			content.innerHTML = ev_limit;
+			if (limit > 0 && ev.length > limit) {
+				let dots = document.createElement ('span');
+				dots.innerHTML = '...';
+				dots.style.cssText = 'cursor: pointer;';
+				dots.addEventListener ( 'click', () => {
+					content.innerHTML = hljs.highlight (ev, {language: 'javascript'}).value;
+				});
+				
+				content.appendChild (dots);
+			}
 			
 			let collapse = document.createElement ('xdump_collapse');
 			collapse.style.cssText = 'display: inline-block; cursor: pointer;';
