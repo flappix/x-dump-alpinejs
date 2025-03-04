@@ -45,7 +45,7 @@ document.addEventListener ('alpine:init', () => {
 			
 			let header =  document.createElement ('xdump_header');
 			header.style.cssText = 'display: block; white-space: pre-wrap; background-color: #252525; padding: 0.2rem; color: white;"';
-			header.innerHTML = `${expr}: <xdump_type style="display: inline; font-weight: bold;">${type}</xdump_type>`;
+			header.innerHTML = `<span title="${expression}">${expr}:</span> <xdump_type style="display: inline; font-weight: bold;">${type}</xdump_type>`;
 			if (isStatic) {
 				header.appendChild (staticLabel);
 			}
